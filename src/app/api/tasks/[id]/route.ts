@@ -55,7 +55,7 @@ import { Task } from "@/modal/task";
 
 export async function DELETE(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> } // 👈 params is a Promise now
 ) {
   try {
     await createMongooseConection();
@@ -73,7 +73,7 @@ export async function DELETE(
       return NextResponse.json({ error: "Invalid token" }, { status: 401 });
     }
 
-    const taskId = context.params.id; // 👈 यहाँ change
+    const { id: taskId } = await context.params; // 👈 await here
     if (!taskId) {
       return NextResponse.json(
         { error: "Task ID is required" },
