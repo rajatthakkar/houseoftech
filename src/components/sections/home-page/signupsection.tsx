@@ -1,5 +1,4 @@
 "use client";
-import BGIMG from "../../../../public/image/dpimage.jpg";
 import {
   Box,
   Button,
